@@ -1,0 +1,246 @@
+@font-face {
+  font-family: "MPLUSRounded";
+  src: url('./fonts/MPLUSRounded1c-Regular.ttf');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "MPLUSRounded";
+  src: url('./fonts/MPLUSRounded1c-Bold.ttf');
+  font-weight: 800;
+}
+
+@main-color: #FAF9F3;
+@yellow-highlight: #ECC200;
+@container-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+@image-shadow: rgba(0, 0, 0, 0.24) 0px 1px 5px;
+@radius-big: 8px;
+@radius-small: 4px;
+
+body {
+  background-color: @main-color;
+  margin: 0;
+  padding: 1rem;
+  font-family: MPLUSRounded, Arial, Helvetica, sans-serif;
+  min-width: 600px;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.top-actions {
+  margin: 0;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 1rem;
+    box-sizing: border-box;
+    flex-wrap: wrap;
+
+    @media screen and (max-width: 700px) {
+      align-items: center;
+      flex-direction: column;
+    }
+  }
+
+  .top-logo {
+    background-color: #CBCCCC;
+    padding: 0.2rem 4rem;
+    border-radius: @radius-small;
+    margin-left: 1rem;
+
+    @media screen and (max-width: 700px) {
+      display: inline-block;
+      margin-bottom: 1rem;
+    }
+  }
+
+  .top-menu {
+    ul {
+      display: flex;
+
+      li {
+        padding: 0.2rem 1rem;
+        border-radius: @radius-small;
+        cursor: pointer;
+
+        &:hover, &.active {
+          background-color: @yellow-highlight;
+          color: white;
+        }
+      }
+    }
+  }
+}
+
+.main {
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+
+  .container {
+    box-shadow: @container-shadow;
+    border-radius: @radius-big;
+    overflow: hidden;
+    background-color: white;
+
+    h1 {
+      padding: 1rem 2rem;
+      margin: 0;
+      font-weight: 400;
+      font-size: 2.2rem;
+    }
+
+    .featured-book {
+      background-color: @main-color;
+      position: relative;
+      padding: 2rem;
+      display: flex;
+      align-items: flex-start;
+
+      .recommended {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 1;
+        background-color: @yellow-highlight;
+        color: white;
+        font-size: 0.8rem;
+        line-height: 0.8rem;
+        padding: 0.4rem;
+        border-bottom-left-radius: 0.5rem;
+      }
+
+      img {
+        width: 220px;
+        border-radius: @radius-big;
+        box-shadow: @image-shadow;
+        margin-right: 1rem;
+
+        @media screen and (max-width: 700px) {
+          width: 180px;
+        }
+      }
+
+      .book-info {
+        .title {
+          line-height: 1.8rem;
+          font-size: 1.8rem;
+          margin-top: 0;
+          margin-bottom: 0.3rem;
+          font-weight: 800;
+        }
+
+        .synopsis {
+          line-height: 1.3em;
+        }
+      }
+    }
+
+    .top-voted {
+      padding: 0 2rem;
+      margin-bottom: 1.5rem;
+
+      h2 {
+        margin-top: 2.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .books-list {
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: -0.5rem;
+        margin-right: -0.5rem;
+
+        .book {
+          width: calc(33.33% - 1rem);
+          background-color: @main-color;
+          border-radius: @radius-big;
+          padding: 1rem;
+          box-sizing: border-box;
+          margin: 0 0.5rem 0.5rem;
+          position: relative;
+
+          @media screen and (max-width: 900px) {
+            width: calc(50% - 1rem);
+          }
+
+          .position {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            z-index: 1;
+            border: 2px solid @yellow-highlight;
+            border-radius: 50%;
+            display: block;
+            width: 30px;
+            height: 30px;
+            text-align: center;
+            line-height: 30px;
+            color: @yellow-highlight;
+            font-weight: bold;
+          }
+
+          img {
+            height: 200px;
+            display: block;
+            margin: auto;
+            border-radius: @radius-big;
+            box-shadow: @image-shadow;
+          }
+
+          .book-info {
+            .title {
+              font-size: 1rem;
+              line-height: 1.2rem;
+              margin-top: 1.2rem;
+              margin-bottom: 0.2rem;
+            }
+
+            .author {
+              margin-bottom: 1em;
+            }
+
+            .synopsis p {
+              margin: 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  background-color: #292929;
+
+  nav {
+    ul {
+      margin: auto;
+      display: flex;
+      justify-content: space-around;
+      max-width: 500px;   
+
+      li {
+        color: white;
+        line-height: 3rem;
+        cursor: pointer;
+      }
+    }
+  } 
+}
