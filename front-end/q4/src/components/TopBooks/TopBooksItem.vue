@@ -1,9 +1,23 @@
+<script setup lang="ts">
+  const props = defineProps(['data', 'index'])
+
+  function getSynopsis() {
+    if (props?.data?.synopsis?.length > 203) {
+      return props.data.synopsis.slice(0, 200) + '...'
+    } else {
+      return props?.data?.synopsis
+    }
+  }
+</script>
+
 <template>
   <div class="top-books-item">
     <div>
       <h2>
-        {{ props.index + 1 }}. {{ props.data.title }}
-        <span class="rating">({{ props.data.rating }}/10)</span>
+        <router-link :to="`/book/${props.data.slug}`">
+          {{ props.index + 1 }}. {{ props.data.title }}
+          <span class="rating">({{ props.data.rating }}/10)</span>
+        </router-link>
       </h2>
       <p class="author">{{ props.data.author }}</p>
       <p>
@@ -16,23 +30,11 @@
         Upvoted {{ props.data.upvotes }} times
       </div>
     </div>
-    <img :src="props.data.cover" alt="{{ props.data.title }}" />
+    <router-link :to="`/book/${props.data.slug}`">
+      <img :src="props.data.cover" alt="{{ props.data.title }}" />
+    </router-link>
   </div>
 </template>
-
-<script setup lang="ts">
-  const props = defineProps(['data', 'index'])
-  console.log(props.data)
-
-  function getSynopsis() {
-    if (props.data.synopsis.length > 203) {
-      return props.data.synopsis.slice(0, 200) + '...'
-    } else {
-      return props.data.synopsis
-    }
-    
-  }
-</script>
 
 <style lang="scss" scoped>
   @use '@/variables';
@@ -71,12 +73,6 @@
 
       button {
         margin-right: 0.7rem;
-
-        .upvoted {
-          border: 2px solid variables.$light-orange;
-          color: variables.$light-orange;
-          background-color: white;
-        }
       }
     }
   }

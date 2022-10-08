@@ -1,9 +1,8 @@
 <script setup lang="ts">
-  import TopBooks from './components/TopBooks/TopBooks.vue'
 </script>
 
 <template>
-  <TopBooks />
+  <router-view />
 </template>
 
 <style scoped>

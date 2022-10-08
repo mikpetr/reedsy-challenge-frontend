@@ -1,15 +1,14 @@
 <script setup lang="ts">
-  import { reactive } from 'vue'
+  import { ref } from 'vue'
   import TopBooksItem from './TopBooksItem.vue';
   import booksApi from '@/api/books'
+  import { Book } from '@/types/Book'
 
-  const state = reactive({
-    books: []
-  })
+  let books = ref<Array<Book>>([])
 
   async function getBooks() {
-    const books = await booksApi.getBooks()
-    state.books = books.data.books
+    const res = await booksApi.getBooks()
+    books.value = res?.data?.books
   }
 
   getBooks()
@@ -19,7 +18,7 @@
   <div class="container">
     <h1>Top books of all time</h1>
     <TopBooksItem
-      v-for="(book, index) in state.books" 
+      v-for="(book, index) in books" 
       :data="book"
       :index="index"
       class="top-books-item"
@@ -28,22 +27,22 @@
 </template>
 
 <style lang="scss" scoped>
-@use '@/variables';
+  @use '@/variables';
 
-h1 {
-  text-align: center;
-  color: variables.$light-orange;
-  margin: 0;
-  padding: 1.5rem 0;
-}
+  h1 {
+    text-align: center;
+    color: variables.$light-orange;
+    margin: 0;
+    padding: 1.5rem 0;
+  }
 
-.top-books-item {
-  &:nth-child(even) {
-    background-color: white;
+  .top-books-item {
+    &:nth-child(even) {
+      background-color: white;
+    }
+    
+    &:nth-child(odd) {
+      background-color: variables.$main-color;
+    }
   }
-  
-  &:nth-child(odd) {
-    background-color: variables.$main-color;
-  }
-}
 </style>
