@@ -7,7 +7,7 @@
 
   let book = ref<Book>()
 
-  async function getBookData(slug: string) {
+  const getBookData = async (slug: string) => {
     const res = await booksApi.getBook({ slug })
     book.value = res?.data
   }
