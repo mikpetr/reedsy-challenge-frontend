@@ -22,6 +22,7 @@
       :data="book"
       :index="index"
       class="top-books-item"
+      data-test="top-book"
     />
   </div>
 </template>

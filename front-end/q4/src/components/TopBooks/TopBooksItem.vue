@@ -20,11 +20,14 @@
         </router-link>
       </h2>
       <p class="author">{{ props.data.author }}</p>
-      <p>
+      <p data-test="synopsis">
         {{ getSynopsis() }}
       </p>
       <div class="upvotes">
-        <button :class="{ 'upvoted': props.data.upvoted }">
+        <button
+          :class="{ 'upvoted': props.data.upvoted }"
+          data-test="vote-button"
+        >
           {{ props.data.upvoted ? 'Upvoted' : 'Upvote'  }}
         </button>
         Upvoted {{ props.data.upvotes }} times
