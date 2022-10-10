@@ -1,6 +1,5 @@
 <script setup lang="ts">
   import { ref } from 'vue'
-  import { useDebounceFn } from '@/composables/useDebounce'
   import TopBooksItem from './TopBooksItem.vue';
   import booksApi from '@/api/books'
   import { Book } from '@/types/Book'
@@ -14,7 +13,7 @@
     filteredBooks.value = books.value
   }
 
-  const searchBooks = useDebounceFn((e: Event) => {
+  const searchBooks = (e: Event) => {
     const searchTerm = (e?.target as HTMLInputElement).value?.toLowerCase()
     
     filteredBooks.value = books.value.filter(book => {
@@ -23,7 +22,7 @@
         book.synopsis.toLowerCase().indexOf(searchTerm) > -1
       )
     })
-  }, 400)
+  }
 
   getBooks()
 </script>
@@ -32,7 +31,7 @@
   <div class="container">
     <h1>Top books of all time</h1>
     <div class="search">
-      <input @input="searchBooks" type="text" placeholder="Search..." />
+      <input @input="searchBooks" type="text" placeholder="Search..." data-test="search" />
     </div>
     <div v-if="!filteredBooks.length">
       <h3 class="error">Nothing is found</h3>

@@ -1,7 +1,9 @@
-import { describe, it, expect, vi } from 'vitest'
-import { mount } from '@vue/test-utils'
+import { describe, it, expect, vi, afterEach } from 'vitest'
+import { mount, enableAutoUnmount } from '@vue/test-utils'
 import booksApi from '@/api/books'
 import Book from './Book.vue'
+
+enableAutoUnmount(afterEach)
 
 describe('Book.vue', () => {
   const mockData = {
@@ -20,12 +22,15 @@ describe('Book.vue', () => {
         slug: 'test'
       }
     })
+
     expect(booksApi.getBook).toHaveBeenCalledTimes(1)
   })
 
   it('Should not make back end call if slug is not provided', () => {
     mockCall.mockClear()
+    
     mount(Book)
+    
     expect(booksApi.getBook).toHaveBeenCalledTimes(0)
   })
 })

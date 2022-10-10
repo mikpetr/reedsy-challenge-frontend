@@ -1,6 +1,8 @@
-import { describe, it, expect } from 'vitest'
-import { mount } from '@vue/test-utils'
+import { describe, it, expect, afterEach } from 'vitest'
+import { mount, enableAutoUnmount } from '@vue/test-utils'
 import TopBooksItem from './TopBooksItem.vue'
+
+enableAutoUnmount(afterEach)
 
 describe('TopBooksItem.vue', () => {
   it('Should add ellipsis if synopsis', () => {
