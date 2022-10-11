@@ -3,33 +3,13 @@ import { describe, it, expect, vi, afterEach } from 'vitest'
 import booksApi from '@/api/books'
 import TopBooks from './TopBooks.vue'
 import TopBooksItem from './TopBooksItem.vue'
+import TopBooksMock from './TopBooks.mock'
 
 enableAutoUnmount(afterEach)
 
-describe('TopBooks.vue', () => {
-  const mockData = {
-    status: 200,
-    statusText: 'OK',
-    headers: {},
-    config: {},
-    data: {
-      books: [
-        {
-          slug: 'test-1',
-          title: 'title1',
-          synopsis: 'synopsis test 1'
-        }, 
-        {
-          slug: 'test-2',
-          title: 'title2',
-          synopsis: 'synopsis test 2'
-        }
-      ]
-    }
-  }
-  
-  vi.spyOn(booksApi, 'getBooks').mockResolvedValue(mockData)
+vi.spyOn(booksApi, 'getBooks').mockResolvedValue(TopBooksMock)
 
+describe('TopBooks.vue', () => {
   it('Should make one request to back end for getting books list', () => {
     mount(TopBooks)
 

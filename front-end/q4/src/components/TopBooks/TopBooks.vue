@@ -2,24 +2,24 @@
   import { ref } from 'vue'
   import TopBooksItem from './TopBooksItem.vue';
   import booksApi from '@/api/books'
-  import { Book } from '@/types/Book'
+  import { Book } from '@/interfaces/Book'
 
-  let books = ref<Array<Book>>([])
-  let filteredBooks = ref<Array<Book>>([])
+  const books = ref<Book[]>([])
+  const filteredBooks = ref<Book[]>([])
 
-  const getBooks = async () => {
+  const getBooks = async (): Promise<void> => {
     const res = await booksApi.getBooks()
     books.value = res?.data?.books
     filteredBooks.value = books.value
   }
 
-  const searchBooks = (e: Event) => {
+  const searchBooks = (e: Event): void => {
     const searchTerm = (e?.target as HTMLInputElement).value?.toLowerCase()
     
-    filteredBooks.value = books.value.filter(book => {
+    filteredBooks.value = books.value.filter((book: Book) => {
       return (
-        book.title.toLowerCase().indexOf(searchTerm) > -1 ||
-        book.synopsis.toLowerCase().indexOf(searchTerm) > -1
+        book.title.toLowerCase().includes(searchTerm) ||
+        book.synopsis.toLowerCase().includes(searchTerm)
       )
     })
   }

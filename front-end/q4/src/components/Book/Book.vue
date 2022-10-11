@@ -1,13 +1,13 @@
 <script setup lang="ts">
   import { ref } from 'vue';
   import booksApi from '@/api/books'
-  import { Book } from '@/types/Book'
+  import { Book } from '@/interfaces/Book'
 
   const props = defineProps(['slug'])
 
-  let book = ref<Book>()
+  const book = ref<Book>()
 
-  const getBookData = async (slug: string) => {
+  const getBookData = async (slug: string): Promise<void> => {
     const res = await booksApi.getBook({ slug })
     book.value = res?.data
   }

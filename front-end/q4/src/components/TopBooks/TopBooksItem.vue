@@ -1,7 +1,7 @@
 <script setup lang="ts">
   const props = defineProps(['data', 'index'])
 
-  const getSynopsis = () => {
+  const getSynopsis = (): string => {
     if (props?.data?.synopsis?.length > 203) {
       return props.data.synopsis.slice(0, 200) + '...'
     } else {

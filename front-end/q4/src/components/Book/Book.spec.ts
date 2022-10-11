@@ -2,20 +2,13 @@ import { describe, it, expect, vi, afterEach } from 'vitest'
 import { mount, enableAutoUnmount } from '@vue/test-utils'
 import booksApi from '@/api/books'
 import Book from './Book.vue'
+import BookMock from './Book.mock'
 
 enableAutoUnmount(afterEach)
 
-describe('Book.vue', () => {
-  const mockData = {
-    status: 200,
-    statusText: 'OK',
-    headers: {},
-    config: {},
-    data: {}
-  }
-  
-  const mockCall = vi.spyOn(booksApi, 'getBook').mockResolvedValue(mockData)
+const mockCall = vi.spyOn(booksApi, 'getBook').mockResolvedValue(BookMock)
 
+describe('Book.vue', () => {
   it('Should make one request to back end to load book data', () => {
     mount(Book, {
       props: {
